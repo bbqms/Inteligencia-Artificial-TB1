@@ -1,19 +1,18 @@
 from typing_extensions import TypedDict
 from typing import List
+from service_client import ServiceClient
 import random
 import math
 
 class Coordinate:
-    def __init__(self, long, lat, id):
+    def __init__(self, lat, long, id):
         self.long = long
         self.lat = lat
         self.id = id
 
-    def distance(self, Coordinate):
-        distanciaX = (Coordinate.long - self.long) * 40000 * math.cos((self.lat + Coordinate.lat) * math.pi / 360) / 360
-        distanciaY = (self.lat - Coordinate.lat) * 40000 / 360
-        distancia = math.sqrt((distanciaX ** 2) + (distanciaY ** 2))
-        return distancia
+    def distance(self, coordB):
+        dist = ServiceClient.compute_distance(Coordinate(self.lat,self.long,self.id),coordB)
+        return dist
 
     def get_name_Coordinate(Coordinate):
         return Coordinate.id

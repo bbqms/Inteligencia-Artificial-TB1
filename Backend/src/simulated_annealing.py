@@ -46,18 +46,16 @@ class SimulatedAnnealing:
 
 def main():
     destinations = RouteController()
-    ciudad1 = Coordinate(-77.0202400,-12.0431800,'Lima')
+    ciudad1 = Coordinate(-12.095266834590417,-77.0542065585971,'Lima')
     destinations.add_cord(ciudad1)
-    ciudad1 = Coordinate(-77.0202400, -12.0431800, 'Lima')
+    ciudad1 = Coordinate(-12.08264894268049, -77.04563370491826, 'Lima')
     destinations.add_cord(ciudad1)
-    ciudad2 = Coordinate(-55.00000000,-10.000000,'Brasil')
+    ciudad2 = Coordinate(-12.092396932744766,-77.03341079647996,'Brasil')
     destinations.add_cord(ciudad2)
-    ciudad3 = Coordinate(-65.00000000, -17.000000, 'Bolivia')
+    ciudad3 = Coordinate(-12.071923319293719, -77.0513069176675, 'Bolivia')
     destinations.add_cord(ciudad3)
-    ciudad4 = Coordinate(-58.00000000, -23.000000, 'Paraguay')
+    ciudad4 = Coordinate(-12.064787751282571, -77.03733650569475, 'Paraguay')
     destinations.add_cord(ciudad4)
-    ciudad5 = Coordinate(-71.00000000, -30.000000, 'Chile')
-    destinations.add_cord(ciudad5)
 
     sa = SimulatedAnnealing(destinations,initial_temperature=1000,cooling_rate=0.003)
     print(sa.route.show())
