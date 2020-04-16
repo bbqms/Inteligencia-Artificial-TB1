@@ -5,7 +5,7 @@ function iniciarMap(){
 
     var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
-    var marcadores = ["asd"];
+    var marcadores = [];
     
 
     var map = new google.maps.Map(document.getElementById('map'),
@@ -17,22 +17,43 @@ function iniciarMap(){
     });
 
 
+
+
+
+
     map.addListener('click', function(e) {
-      placeMarker(e.latLng, map);
+      if(marcadores.length == 0){
+        placeMarkerTruck(e.latLng, map);
+      }
+      else{
+        placeMarkerBox(e.latLng, map);
+      }
+      
       var aux = { lat: e.latLng.lat(), lng: e.latLng.lng()}
+      
       marcadores.push(aux);
       console.log(marcadores)
     });
   
-  function placeMarker(position, map) {
+    function placeMarkerTruck(position, map) {
       var marker = new google.maps.Marker({
           position: position,
-          map: map
+          map: map,
+          icon: iconTruck
       });
       
       map.panTo(position);
-      
   }
+
+  function placeMarkerBox(position, map) {
+    var marker = new google.maps.Marker({
+        position: position,
+        map: map,
+        icon: iconBox
+    });
+    
+    map.panTo(position);
+}
 
 
 
