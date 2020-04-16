@@ -11,7 +11,7 @@ class Coordinate:
         self.id = id
 
     def distance(self, coordB):
-        dist = ServiceClient.compute_distance(Coordinate(self.lat,self.long,self.id),coordB)
+        dist = ServiceClient.compute_distance(self.lat,self.long,coordB.lat,coordB.long)
         return dist
 
     def get_name_Coordinate(Coordinate):
