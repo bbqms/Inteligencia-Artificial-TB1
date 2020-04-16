@@ -5,6 +5,7 @@ function iniciarMap(){
 
     var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
+    var marcadores = ["asd"];
     
 
     var map = new google.maps.Map(document.getElementById('map'),
@@ -16,6 +17,25 @@ function iniciarMap(){
     });
 
 
+    map.addListener('click', function(e) {
+      placeMarker(e.latLng, map);
+      var aux = { lat: e.latLng.lat(), lng: e.latLng.lng()}
+      marcadores.push(aux);
+      console.log(marcadores)
+    });
+  
+  function placeMarker(position, map) {
+      var marker = new google.maps.Marker({
+          position: position,
+          map: map
+      });
+      
+      map.panTo(position);
+      
+  }
+
+
+
 
     var iconBox = {
       url: "caja.png", 
@@ -25,7 +45,7 @@ function iniciarMap(){
   };
     var iconTruck = {
       url: "camion.png", 
-      scaledSize: new google.maps.Size(50, 50), // scaled size
+      scaledSize: new google.maps.Size(70,50), // scaled size
       origin: new google.maps.Point(0,0), // origin
       anchor: new google.maps.Point(0, 0)
     }
@@ -35,10 +55,7 @@ function iniciarMap(){
       caja : iconBox,
      camion: iconTruck
     }
-
     
-
-
         var features = [
           {
             position: new google.maps.LatLng(-33.91721, 151.22630),
@@ -112,11 +129,12 @@ function iniciarMap(){
         };
 
         
-        
+      
 
-        console.log(a)
+        console.log("hola")
+        console.log(marcadores)
    
 
 }
 
-document.getElementById('lat').innerHTML = "aver"
+//document.getElementById('lat').innerHTML = "aver"
