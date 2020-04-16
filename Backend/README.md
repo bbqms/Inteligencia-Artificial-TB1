@@ -25,7 +25,6 @@ $env:FLASK_APP="controller.py"
 
 ## Run Project
 
-
 ```
 python -m flask run
 ```
