@@ -1,9 +1,10 @@
 import random
 import math
-from model import Coordinate, RouteController,Route
+from model import Coordinate, RouteController,Route,Dictionary
 
 class SimulatedAnnealing:
     def __init__(self,destinations,initial_temperature = 1000,cooling_rate = 0.03):
+        self.dictionary = {}
         self.route_controller = destinations
         self.route = Route(destinations)
         self.route.generate_route()
@@ -28,27 +29,31 @@ class SimulatedAnnealing:
         new_route.set_Coordinate(pos2,cord1)
         new_route.set_Coordinate(pos1,cord2)
 
-        actual_energy = self.route.get_distance()
-        new_energy = new_route.get_distance()
+        actual_energy = self.route.get_distance(self.dictionary)
+        new_energy = new_route.get_distance(self.dictionary)
 
         delta = new_energy - actual_energy
 
         if self.acceptance_function(delta):
             self.route = new_route
-        if new_route.get_distance() < self.best.get_distance():
+        if new_route.get_distance(self.dictionary) < self.best.get_distance(self.dictionary):
             self.best = new_route
             print(new_route.get_distance())
     def run(self):
         while self.temperature > 1:
+            print(self.iterations)
             self.iterations = self.iterations + 1
             self.new_route()
             self.temperature *= 1 - self.cooling_rate
+        self.resetDictionary()
+    def resetDictionary(self):
+        self.dictionary = {}
 
 def main():
     destinations = RouteController()
     ciudad1 = Coordinate(-12.095266834590417,-77.0542065585971,'Lima')
     destinations.add_cord(ciudad1)
-    ciudad1 = Coordinate(-12.08264894268049, -77.04563370491826, 'Lima')
+    ciudad1 = Coordinate(-12.08264894268049, -77.04563370491826, 'Argentina')
     destinations.add_cord(ciudad1)
     ciudad2 = Coordinate(-12.092396932744766,-77.03341079647996,'Brasil')
     destinations.add_cord(ciudad2)
@@ -57,7 +62,7 @@ def main():
     ciudad4 = Coordinate(-12.064787751282571, -77.03733650569475, 'Paraguay')
     destinations.add_cord(ciudad4)
 
-    sa = SimulatedAnnealing(destinations,initial_temperature=1000,cooling_rate=0.003)
+    sa = SimulatedAnnealing(destinations,initial_temperature=1000,cooling_rate=0.03)
     print(sa.route.show())
     print(sa.route.get_distance())
     sa.run()

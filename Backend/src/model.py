@@ -4,14 +4,26 @@ from service_client import ServiceClient
 import random
 import math
 
+class Dictionary:
+    dictionary = {}
+    def __init__(self,dictionary = {}):
+       self.dictionary = dictionary
+    def restart(self):
+        self.dictionary = {}
+
+
 class Coordinate:
     def __init__(self, lat, long, id):
         self.long = long
         self.lat = lat
         self.id = id
 
-    def distance(self, coordB):
-        dist = ServiceClient.compute_distance(self.lat,self.long,coordB.lat,coordB.long)
+    def distance(self, coordB,dictionary = {}):
+        key = str(self.lat) + ","+str(self.long) + "/" + str(coordB.lat) + "," + str(coordB.long)
+        dist = dictionary.get(key)
+        if dist is None:
+            dist = ServiceClient.compute_distance(self.lat,self.long,coordB.lat,coordB.long)
+            dictionary[key] = dist
         return dist
 
     def get_name_Coordinate(Coordinate):
@@ -60,7 +72,7 @@ class Route:
     def route_lenght(self):
         return len(self.route)
 
-    def get_distance(self):
+    def get_distance(self,dictionary = {}):
         route_distance = 0
         for indice in range(0, self.route_lenght()):
             start_coordinate = self.get_cord(indice)
@@ -68,7 +80,7 @@ class Route:
                 goal_coordinate = self.get_cord(indice + 1)
             else:
                 goal_coordinate = self.get_cord(0)
-            route_distance += start_coordinate.distance(goal_coordinate)
+            route_distance += start_coordinate.distance(goal_coordinate,dictionary)
         self.distance = route_distance
         return self.distance
 
