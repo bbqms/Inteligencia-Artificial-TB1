@@ -6,23 +6,18 @@
     </head>
 <body>
     <div id = "map"></div>
+    <h1 id = "lat">hola</h1>
+    <button id="ordenar">Ver</button>
     <script src="script.js"> </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAkSoqQ9v3nMJ9Tv60ZSwkZcgjoNkCGBsw&callback=iniciarMap"></script>
     <script>
-        var request = new Request("http://localhost:5000/");
-
-        fetch(request).then(function(response) {
-    // Convert to JSON
-    return response.json();
-}).then(function(j) {
-    // Yay, `j` is a JavaScript object
-    console.log(JSON.stringify(j));
-}).catch(function(error) {
-    console.log('Request failed', error)
-});
+        fetch('http://localhost:5000/')
+         .then(function(response) {
+            return response.json();
+            })
+        .then(function(myJson) {
+        console.log(myJson);
+        });
     </script>
-    <h1 id = "lat">hola</h1>
-    <script src="script.js"></script>
-
 </body>
 </html>

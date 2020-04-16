@@ -1,26 +1,33 @@
 
 
+
 function iniciarMap(){
     var coord = {lat: -28.024, lng: 140.887};
 
-    var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-
-    var marcadores = [];
+    var  marcadores = [];
     
-
-    var map = new google.maps.Map(document.getElementById('map'),
+    // Inicializando el mapa
+     var map = new google.maps.Map(document.getElementById('map'),
     {
         zoom:15,
         center: new google.maps.LatLng(-33.91722, 151.23064)
-        
-        
     });
 
+    var button = document.getElementById("ordenar");
+
+     button.onclick = function(){
+      var bounds = new google.maps.LatLngBounds();
+      
+      
+      for (i = 0; i < marcadores.length; i++) {
+        var aux = new google.maps.LatLng(marcadores[i].lat,marcadores[i].lng)
+      bounds.extend(aux)
+      }
+      map.fitBounds(bounds);
+    }
 
 
-
-
-
+    // Agregar marcadores con un click
     map.addListener('click', function(e) {
       if(marcadores.length == 0){
         placeMarkerTruck(e.latLng, map);
@@ -30,11 +37,10 @@ function iniciarMap(){
       }
       
       var aux = { lat: e.latLng.lat(), lng: e.latLng.lng()}
-      
       marcadores.push(aux);
       console.log(marcadores)
     });
-  
+    // El primer click sera el camion
     function placeMarkerTruck(position, map) {
       var marker = new google.maps.Marker({
           position: position,
@@ -43,9 +49,9 @@ function iniciarMap(){
       });
       
       map.panTo(position);
-  }
-
-  function placeMarkerBox(position, map) {
+    }
+    // Los demas clicks sera el camion
+    function placeMarkerBox(position, map) {
     var marker = new google.maps.Marker({
         position: position,
         map: map,
@@ -53,31 +59,33 @@ function iniciarMap(){
     });
     
     map.panTo(position);
-}
+    }
 
 
 
-
+    //Icono de la Caja
     var iconBox = {
       url: "caja.png", 
       scaledSize: new google.maps.Size(50, 50), // scaled size
       origin: new google.maps.Point(0,0), // origin
       anchor: new google.maps.Point(0, 0) // anchor
-  };
+      };
+
+    //Icono del camion  
     var iconTruck = {
       url: "camion.png", 
       scaledSize: new google.maps.Size(70,50), // scaled size
       origin: new google.maps.Point(0,0), // origin
       anchor: new google.maps.Point(0, 0)
-    }
+      }
 
 
-    var icons = {
-      caja : iconBox,
+     var icons = {
+     caja : iconBox,
      camion: iconTruck
-    }
+     }
     
-        var features = [
+      var features = [
           {
             position: new google.maps.LatLng(-33.91721, 151.22630),
             type: 'camion',
@@ -137,25 +145,27 @@ function iniciarMap(){
             position: new google.maps.LatLng(-33.91727341958453, 151.23348314155578),
             type: 'caja'
           }
-        ];
+      ];
 
-        // Create markers.
-        for (var i = 0; i < features.length; i++) {
-          var marker = new google.maps.Marker({
-            position: features[i].position,
-            icon: icons[features[i].type],
-            map: map,
-            title: features[i].title
-          });
-        };
+      // Dibujando marcadores de features
+      for (var i = 0; i < features.length; i++) {
+        var marker = new google.maps.Marker({
+          position: features[i].position,
+          icon: icons[features[i].type],
+          map: map,
+          title: features[i].title
+        });
+      };
 
         
-      
+
 
         console.log("hola")
         console.log(marcadores)
    
 
 }
+
+
 
 //document.getElementById('lat').innerHTML = "aver"
