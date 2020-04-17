@@ -11,6 +11,10 @@ def findRoutes():
     body = request.get_json(force=True)
     print(body)
     lista = list(body)
+
+    if len(lista) < 2:
+        return []
+
     destinations = RouteController()
     for i in lista:
         destinations.add_cord(Coordinate(i['lat'],i['lng'],'A'))
