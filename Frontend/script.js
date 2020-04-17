@@ -1,11 +1,11 @@
-
-
-
 function iniciarMap(){
     var coord = {lat: -28.024, lng: 140.887};
 
     var  marcadores = [];
     
+    var directionsService = new google.maps.DirectionsService;
+    var directionsDisplay = new google.maps.DirectionsRenderer;
+
     // Inicializando el mapa
      var map = new google.maps.Map(document.getElementById('map'),
     {
@@ -13,8 +13,9 @@ function iniciarMap(){
         center: new google.maps.LatLng(-33.91722, 151.23064)
     });
 
+  
+    directionsDisplay.setMap(map);
     var button = document.getElementById("ordenar");
-
      button.onclick = function(){
       var bounds = new google.maps.LatLngBounds();
       
@@ -25,6 +26,29 @@ function iniciarMap(){
       }
       map.fitBounds(bounds);
     }
+
+    //Icono de la Caja
+    var iconBox = {
+      url: "caja.png", 
+      scaledSize: new google.maps.Size(50, 50), // scaled size
+      origin: new google.maps.Point(0,0), // origin
+      anchor: new google.maps.Point(10,10) // anchor
+      };
+
+    //Icono del camion  
+    var iconTruck = {
+      url: "camion.png", 
+      scaledSize: new google.maps.Size(70,50), // scaled size
+      origin: new google.maps.Point(0,0), // origin
+      anchor: new google.maps.Point(0, 0)
+      }
+
+
+     var icons = {
+     caja : iconBox,
+     camion: iconTruck
+     }
+
 
 
     // Agregar marcadores con un click
@@ -40,6 +64,7 @@ function iniciarMap(){
       marcadores.push(aux);
       console.log(marcadores)
     });
+
     // El primer click sera el camion
     function placeMarkerTruck(position, map) {
       var marker = new google.maps.Marker({
@@ -60,30 +85,7 @@ function iniciarMap(){
     
     map.panTo(position);
     }
-
-
-
-    //Icono de la Caja
-    var iconBox = {
-      url: "caja.png", 
-      scaledSize: new google.maps.Size(50, 50), // scaled size
-      origin: new google.maps.Point(0,0), // origin
-      anchor: new google.maps.Point(0, 0) // anchor
-      };
-
-    //Icono del camion  
-    var iconTruck = {
-      url: "camion.png", 
-      scaledSize: new google.maps.Size(70,50), // scaled size
-      origin: new google.maps.Point(0,0), // origin
-      anchor: new google.maps.Point(0, 0)
-      }
-
-
-     var icons = {
-     caja : iconBox,
-     camion: iconTruck
-     }
+    
     
       var features = [
           {
@@ -157,13 +159,31 @@ function iniciarMap(){
         });
       };
 
-        
 
 
         console.log("hola")
         console.log(marcadores)
+        console.log(features[0].position.lat())
    
 
+        var waypts = [];
+
+            for (var i = 1; i < features.length-2; i++){
+              waypts.push({ location: { lat: features[i].position.lat(), lng: features[i].position.lng() }, stopover: true })
+            }
+
+      directionsService.route({
+        origin: { lat: features[0].position.lat(), lng: features[0].position.lng() },//db waypoint start
+        destination: { lat: features[features.length-1].position.lat(), lng: features[features.length-1].position.lng() },//db waypoint end
+        waypoints: waypts,
+        travelMode: google.maps.TravelMode.WALKING
+    }, function (response, status) {
+        if (status === google.maps.DirectionsStatus.OK) {
+            directionsDisplay.setDirections(response);
+        } else {
+            window.alert('Ha fallat la comunicació amb el mapa a causa de: ' + status);
+        }
+    });
 }
 
 
