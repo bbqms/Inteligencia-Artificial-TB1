@@ -21,8 +21,8 @@ class SimulatedAnnealing:
     def new_route(self):
         new_route = Route(self.route_controller,self.route)
 
-        pos1 = random.randrange(self.route.route_lenght())
-        pos2 = random.randrange(self.route.route_lenght())
+        pos1 = random.randint(1,self.route.route_lenght() - 1)
+        pos2 = random.randint(1,self.route.route_lenght() - 1)
 
         cord1 = new_route.get_cord(pos1)
         cord2 = new_route.get_cord(pos2)
@@ -72,4 +72,3 @@ def main():
     print("Termino el algoritmo con %i vueltas" % sa.iterations)
 
 
-main()

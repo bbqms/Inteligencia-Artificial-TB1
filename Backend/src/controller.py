@@ -9,15 +9,18 @@ CORS(app)
 @app.route('/', methods=['POST'])
 def findRoutes():
     body = request.get_json(force=True)
-
     print(body)
+    lista = list(body)
+    destinations = RouteController()
+    for i in lista:
+        destinations.add_cord(Coordinate(i['lat'],i['lng'],'A'))
     #TODO
-    #destinations = RouteController()
-
-    #sa = SimulatedAnnealing(destinations, initial_temperature=1000, cooling_rate=0.03)
-    #sa.run()
-    #return jsonify(sa.best)
-    return 'HOLA'
+    sa = SimulatedAnnealing(destinations, initial_temperature=1000, cooling_rate=0.45)
+    sa.run()
+    response = []
+    for i in sa.best:
+        response.append({lat:best.lat,lng:best.long})
+    return jsonify(response)
 
 if __name__ == '__main__':
     app.run(debug=True)
