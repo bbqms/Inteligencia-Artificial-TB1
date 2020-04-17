@@ -19,7 +19,7 @@ def findRoutes():
     sa.run()
     response = []
     for i in sa.best:
-        response.append({lat:best.lat,lng:best.long})
+        response.append({'lat':i.lat,'lng':i.long})
     return jsonify(response)
 
 if __name__ == '__main__':
