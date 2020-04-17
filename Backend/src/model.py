@@ -32,6 +32,8 @@ class Coordinate:
 
 class RouteController:
     destination_list = []
+    def __init__(self):
+        self.destination_list = []
 
     def add_cord(self, coordinate):
         self.destination_list.append(coordinate)

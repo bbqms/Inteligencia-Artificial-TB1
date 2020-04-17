@@ -14,11 +14,12 @@ def findRoutes():
 
     if len(lista) < 2:
         return []
-
+    destinations = None
     destinations = RouteController()
     for i in lista:
         destinations.add_cord(Coordinate(i['lat'],i['lng'],'A'))
     #TODO
+    sa = None
     sa = SimulatedAnnealing(destinations, initial_temperature=1000, cooling_rate=0.45)
     sa.run()
     response = []
