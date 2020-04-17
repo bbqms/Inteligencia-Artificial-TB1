@@ -16,8 +16,9 @@ function iniciarMap(){
   
     directionsDisplay.setMap(map);
     var button = document.getElementById("ordenar");
-
     var btnGenerarRuta = document.getElementById("generarRuta");
+    var btnEnviar = document.getElementById("enviar");
+
      button.onclick = function(){
       var bounds = new google.maps.LatLngBounds();
       
@@ -201,6 +202,24 @@ function iniciarMap(){
           
         }
 
+        btnEnviar.onclick = function(){
+          var url = 'http://localhost:5000/';
+          var data = marcadores
+          console.log(data);
+          console.log(JSON.stringify(data))
+          fetch(url, {
+            method: 'POST', // or 'PUT'
+            body: JSON.stringify(data), // data can be `string` or {object}!
+            headers:{
+              'Content-Type': 'application/json'
+            }
+          }).then(res => res.json())
+          .catch(error => console.error('Error:', error))
+          .then(response => console.log('Success:', response));
+          
+        }
+
+      
 
       /*directionsService.route({
         origin: { lat: features[0].position.lat(), lng: features[0].position.lng() },//db waypoint start
