@@ -63,7 +63,6 @@ class Route:
         self.distance = 0
         for indice in range(0, self.route_controller.lenght()):
             self.set_Coordinate(indice, self.route_controller.get_cord(indice))
-        random.shuffle(self.route)
 
     def get_cord(self, position):
         return self.route[position]
