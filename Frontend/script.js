@@ -178,7 +178,29 @@ function iniciarMap(){
         
 
 
+        function trazarla(lista){
+          console.log(lista)
+          var waypts = [];
+          for (var i = 1; i < lista.length; i++){
+            waypts.push({ location: { lat: lista[i].lat, lng: lista[i].lng }, stopover: true})
+         }
 
+          directionsService.route({
+            origin: { lat: lista[0].lat, lng: lista[0].lng },//db waypoint start
+            destination: { lat: lista[0].lat, lng: lista[0].lng },//db waypoint end
+            waypoints: waypts,
+            travelMode: google.maps.TravelMode.DRIVING
+        }, function (response, status) {
+            if (status === google.maps.DirectionsStatus.OK) {
+                directionsDisplay.setDirections(response);
+            } else {
+                window.alert('Ha fallat la comunicació amb el mapa a causa de: ' + status);
+            }
+        });
+        
+
+
+        }
         btnGenerarRuta.onclick = function(){
 
           var waypts = [];
@@ -215,7 +237,7 @@ function iniciarMap(){
             }
           }).then(res => res.json())
           .catch(error => console.error('Error:', error))
-          .then(response => console.log('Success:', response));
+          .then(response => console.log('Success:', response) );
           
         }
 
