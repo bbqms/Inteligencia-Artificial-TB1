@@ -18,17 +18,19 @@ class Coordinate:
         self.lat = lat
         self.id = id
 
-    def distance(self, coordB,dictionary = {}):
+    def distance(self, coordB,dictionary = {},use_heuristic = True):
         key = str(self.lat) + ","+str(self.long) + "/" + str(coordB.lat) + "," + str(coordB.long)
         dist = dictionary.get(key)
         if dist is None:
-            dist = ServiceClient.compute_distance(self.lat,self.long,coordB.lat,coordB.long)
+            if use_heuristic:
+                dist = ServiceClient.compute_heuristic_distance(self.lat,self.long,coordB.lat,coordB.long)
+            else:
+                dist = ServiceClient.compute_distance(self.lat,self.long,coordB.lat,coordB.long)
             dictionary[key] = dist
         return dist
 
-    def get_name_Coordinate(Coordinate):
+    def get_name_coordinate(Coordinate):
         return Coordinate.id
-
 
 class RouteController:
     destination_list = []
@@ -87,7 +89,7 @@ class Route:
 
     def show(self):
         for i in range(0, self.route_lenght() ):
-            print(Coordinate.get_name_Coordinate(self.get_cord(i)))
+            print(Coordinate.get_name_coordinate(self.get_cord(i)))
 
 #class Coordinate(TypedDict):
 #    id: int

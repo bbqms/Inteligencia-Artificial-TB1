@@ -3,7 +3,7 @@ import math
 from model import Coordinate, RouteController,Route,Dictionary
 
 class SimulatedAnnealing:
-    def __init__(self,destinations,initial_temperature = 1000,cooling_rate = 0.03):
+    def __init__(self,destinations,initial_temperature = 1000,cooling_rate = 0.003):
         self.dictionary = {}
         self.route_controller = destinations
         self.route = Route(destinations)
