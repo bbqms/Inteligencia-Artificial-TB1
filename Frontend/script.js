@@ -10,12 +10,14 @@ function iniciarMap(){
      var map = new google.maps.Map(document.getElementById('map'),
     {
         zoom:15,
-        center: new google.maps.LatLng(-33.91722, 151.23064)
+        center: new google.maps.LatLng(-12.077118280948193, -77.09347695659221)
     });
 
   
     directionsDisplay.setMap(map);
     var button = document.getElementById("ordenar");
+
+    var btnGenerarRuta = document.getElementById("generarRuta");
      button.onclick = function(){
       var bounds = new google.maps.LatLngBounds();
       
@@ -91,7 +93,7 @@ function iniciarMap(){
           {
             position: new google.maps.LatLng(-33.91721, 151.22630),
             type: 'camion',
-            title : 'hola'
+            title : '1'
           }, {
             position: new google.maps.LatLng(-33.91539, 151.22820),
             type: 'caja'
@@ -139,13 +141,16 @@ function iniciarMap(){
             type: 'caja'
           }, {
             position: new google.maps.LatLng(-33.91851096391805, 151.2344058214569),
-            type: 'caja'
+            type: 'caja',
+            title: "17"
           }, {
             position: new google.maps.LatLng(-33.91818154739766, 151.2346203981781),
-            type: 'caja'
+            type: 'caja',
+            title: "18"
           }, {
             position: new google.maps.LatLng(-33.91727341958453, 151.23348314155578),
-            type: 'caja'
+            type: 'caja',
+            title: "19"
           }
       ];
 
@@ -159,20 +164,45 @@ function iniciarMap(){
         });
       };
 
-
-
         console.log("hola")
         console.log(marcadores)
-        console.log(features[0].position.lat())
+        console.log(features.length)
    
 
-        var waypts = [];
+        //var waypts = [];
 
-            for (var i = 1; i < features.length-2; i++){
-              waypts.push({ location: { lat: features[i].position.lat(), lng: features[i].position.lng() }, stopover: true })
+        /*for (var i = 1; i < features.length-2; i++){
+            waypts.push({ location: { lat: features[i].position.lat(), lng: features[i].position.lng() }, stopover: true })
+        }*/
+        
+
+
+
+        btnGenerarRuta.onclick = function(){
+
+          var waypts = [];
+
+          for (var i = 1; i < marcadores.length; i++){
+            waypts.push({ location: { lat: marcadores[i].lat, lng: marcadores[i].lng }, stopover: true })
+         }
+
+          directionsService.route({
+            origin: { lat: marcadores[0].lat, lng: marcadores[0].lng },//db waypoint start
+            destination: { lat: marcadores[0].lat, lng: marcadores[0].lng },//db waypoint end
+            waypoints: waypts,
+            travelMode: google.maps.TravelMode.WALKING
+        }, function (response, status) {
+            if (status === google.maps.DirectionsStatus.OK) {
+                directionsDisplay.setDirections(response);
+            } else {
+                window.alert('Ha fallat la comunicació amb el mapa a causa de: ' + status);
             }
+        });
+          
+        }
 
-      directionsService.route({
+
+      /*directionsService.route({
         origin: { lat: features[0].position.lat(), lng: features[0].position.lng() },//db waypoint start
         destination: { lat: features[features.length-1].position.lat(), lng: features[features.length-1].position.lng() },//db waypoint end
         waypoints: waypts,
@@ -183,7 +213,7 @@ function iniciarMap(){
         } else {
             window.alert('Ha fallat la comunicació amb el mapa a causa de: ' + status);
         }
-    });
+    });*/
 }
 
 
