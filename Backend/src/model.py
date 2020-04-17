@@ -85,7 +85,7 @@ class Route:
         return self.distance
 
     def show(self):
-        for i in range(0, self.route_lenght()):
+        for i in range(0, self.route_lenght() ):
             print(Coordinate.get_name_Coordinate(self.get_cord(i)))
 
 #class Coordinate(TypedDict):

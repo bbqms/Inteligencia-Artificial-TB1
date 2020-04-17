@@ -64,11 +64,11 @@ def main():
 
     sa = SimulatedAnnealing(destinations,initial_temperature=1000,cooling_rate=0.03)
     print(sa.route.show())
-    print(sa.route.get_distance())
+    print(sa.route.get_distance(sa.dictionary))
     sa.run()
 
     print(sa.route.show())
-    print(sa.route.get_distance())
+    print(sa.route.get_distance(sa.dictionary))
     print("Termino el algoritmo con %i vueltas" % sa.iterations)
 
 
