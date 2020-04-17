@@ -42,7 +42,7 @@ function iniciarMap(){
       url: "camion.png", 
       scaledSize: new google.maps.Size(70,50), // scaled size
       origin: new google.maps.Point(0,0), // origin
-      anchor: new google.maps.Point(0, 0)
+      anchor: new google.maps.Point(10, 10)
       }
 
 
@@ -155,14 +155,14 @@ function iniciarMap(){
       ];
 
       // Dibujando marcadores de features
-      for (var i = 0; i < features.length; i++) {
+      /*for (var i = 0; i < features.length; i++) {
         var marker = new google.maps.Marker({
           position: features[i].position,
           icon: icons[features[i].type],
           map: map,
           title: features[i].title
         });
-      };
+      };*/
 
         console.log("hola")
         console.log(marcadores)
@@ -183,14 +183,14 @@ function iniciarMap(){
           var waypts = [];
 
           for (var i = 1; i < marcadores.length; i++){
-            waypts.push({ location: { lat: marcadores[i].lat, lng: marcadores[i].lng }, stopover: true })
+            waypts.push({ location: { lat: marcadores[i].lat, lng: marcadores[i].lng }, stopover: true})
          }
 
           directionsService.route({
             origin: { lat: marcadores[0].lat, lng: marcadores[0].lng },//db waypoint start
             destination: { lat: marcadores[0].lat, lng: marcadores[0].lng },//db waypoint end
             waypoints: waypts,
-            travelMode: google.maps.TravelMode.WALKING
+            travelMode: google.maps.TravelMode.DRIVING
         }, function (response, status) {
             if (status === google.maps.DirectionsStatus.OK) {
                 directionsDisplay.setDirections(response);
