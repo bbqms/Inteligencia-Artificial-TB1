@@ -1,6 +1,6 @@
 #map {
-    height: 600px;
-    width: 90%;
+    height: 500px;
+    width: 80%;
     align-items: center;
     flex: auto;
     margin: 0 auto;
@@ -22,9 +22,14 @@
 
 .fondo{
     background: #DAD299;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to right, #B0DAB9, #DAD299);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to right, #B0DAB9, #DAD299); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	background: -webkit-linear-gradient(to right, #B0DAB9, #DAD299);  /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to right, #B0DAB9, #DAD299); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
+}
+
+#floating-panel {
+	position: absosolu;
+	text-align: center;
 }
 
 .button {
@@ -47,4 +52,13 @@ background: linear-gradient(to right, #B0DAB9, #DAD299); /* W3C, IE 10+/ Edge, F
 .button:active {
 	position:relative;
 	top:1px;
+}
+
+.alert span {
+	vertical-align: middle;
+	line-height:normal;
+}
+  
+.alert > div {
+	line-height: 34px;
 }
