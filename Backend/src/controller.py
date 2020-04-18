@@ -12,9 +12,9 @@ def findRoutes():
     body = None
     body = request.get_json(force=True)
     temp = request.args.get('use_heuristic')
-    flag = True
-    if temp != "true":
-        flag = False
+    flag = False
+    if temp != "false":
+        flag = True
     print(body)
     lista = list(body)
     if len(lista) < 2:
