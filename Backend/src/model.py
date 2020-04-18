@@ -75,7 +75,7 @@ class Route:
     def route_lenght(self):
         return len(self.route)
 
-    def get_distance(self,dictionary = {}):
+    def get_distance(self,dictionary = {},use_heuristic = True):
         route_distance = 0
         for indice in range(0, self.route_lenght()):
             start_coordinate = self.get_cord(indice)
@@ -83,7 +83,7 @@ class Route:
                 goal_coordinate = self.get_cord(indice + 1)
             else:
                 goal_coordinate = self.get_cord(0)
-            route_distance += start_coordinate.distance(goal_coordinate,dictionary)
+            route_distance += start_coordinate.distance(goal_coordinate,dictionary,use_heuristic)
         self.distance = route_distance
         return self.distance
 

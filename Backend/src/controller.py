@@ -11,6 +11,10 @@ def findRoutes():
     start_time = time()
     body = None
     body = request.get_json(force=True)
+    temp = request.args.get('use_heuristic')
+    flag = True
+    if temp != "true":
+        flag = False
     print(body)
     lista = list(body)
     if len(lista) < 2:
@@ -21,7 +25,7 @@ def findRoutes():
         destinations.add_cord(Coordinate(i['lat'],i['lng'],'A'))
     #TODO
     sa = None
-    sa = SimulatedAnnealing(destinations, initial_temperature=1000, cooling_rate=0.0015)
+    sa = SimulatedAnnealing(destinations, initial_temperature=1000, cooling_rate=0.0015,use_heuristic=flag)
     sa.run()
     response = []
     for i in sa.best:
