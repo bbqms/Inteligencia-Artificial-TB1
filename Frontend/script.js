@@ -15,9 +15,10 @@ function iniciarMap(){
 
   
     directionsDisplay.setMap(map);
-    var button = document.getElementById("ordenar");
-    var btnGenerarRuta = document.getElementById("generarRuta");
     var btnEnviar = document.getElementById("enviar");
+   /* var button = document.getElementById("ordenar");
+    var btnGenerarRuta = document.getElementById("generarRuta");
+    
 
      button.onclick = function(){
       var bounds = new google.maps.LatLngBounds();
@@ -28,7 +29,7 @@ function iniciarMap(){
       bounds.extend(aux)
       }
       map.fitBounds(bounds);
-    }
+    }*/
 
     //Icono de la Caja
     var iconBox = {
@@ -201,7 +202,7 @@ function iniciarMap(){
 
 
         }
-        btnGenerarRuta.onclick = function(){
+        /*btnGenerarRuta.onclick = function(){
 
           var waypts = [];
 
@@ -222,7 +223,7 @@ function iniciarMap(){
             }
         });
           
-        }
+        }*/
 
         btnEnviar.onclick = function(){
           var url = 'http://localhost:5000/';
