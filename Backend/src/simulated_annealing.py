@@ -40,12 +40,14 @@ class SimulatedAnnealing:
             self.best = new_route
             print(new_route.get_distance())
     def run(self):
+        print("Corriendo algoritmo")
         while self.temperature > 1:
-            print(self.iterations)
             self.iterations = self.iterations + 1
             self.new_route()
             self.temperature *= 1 - self.cooling_rate
+        print("La cantidad de iteraciones que dio es de : ",self.iterations)
         self.resetDictionary()
+        print("Termino algoritmo")
     def resetDictionary(self):
         self.dictionary = {}
 
@@ -62,7 +64,7 @@ def main():
     ciudad4 = Coordinate(-12.064787751282571, -77.03733650569475, 'Paraguay')
     destinations.add_cord(ciudad4)
 
-    sa = SimulatedAnnealing(destinations,initial_temperature=1000,cooling_rate=0.03)
+    sa = SimulatedAnnealing(destinations,initial_temperature=1000,cooling_rate=0.0000003)
     print(sa.route.show())
     print(sa.route.get_distance(sa.dictionary))
     sa.run()
