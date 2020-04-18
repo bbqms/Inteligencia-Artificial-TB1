@@ -205,6 +205,10 @@ function iniciarMap() {
       marcadores_destino[i].setMap(null);
     }
     marcadores_destino = [];
+    directionsDisplay.setMap(null);
+    directionsDisplay = null;
+    directionsDisplay = new google.maps.DirectionsRenderer;
+    directionsDisplay.setMap(map);
   }
 
   btnLimpiar.onclick = function () {
