@@ -6,109 +6,164 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bs-stepper/dist/css/bs-stepper.min.css">
-    <link rel='stylesheet' type="text/css" href="styles/estilo.css">
+    <link rel='stylesheet' type="text/css" href="styles/style.css">
 </head>
 
 <body class="fondo">
-    <h1 style="text-align: center;">Entrega de Paquetes con Simulated Annealing</h1>
+    <div class="container">
 
-    <div class="descriptiion">
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-            ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-            nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
-            anim id est laborum.
-        </p>
-    </div>
+        <h1 style="text-align: center;">Entrega de Paquetes con Simulated Annealing</h1>
 
-    <div>
-        
-        <div id="floating-panel">
-            <button id="limpiar" type="button" class="btn btn-danger">Limpiar</button>
-
-            <button id="importar" class="btn btn-secondary">Importar</button>
-            <label for="file-select">
-                <input id="file-select" type="file" style="display:none">
-            </label>
-
-
-            <button id="exportar" type="button" class="btn btn-secondary">Exportar</button>
+        <div id="description">
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                ex
+                ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                fugiat
+                nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+                mollit
+                anim id est laborum.
+            </p>
         </div>
-        
-        <div id="map"></div>
 
-        <div class="instructions">
+        <hr>
+        <div id="map-box">
 
-            <div class="bs-stepper" id="stepper">
-                <div class="bs-stepper-header" role="tablist">
-                    <!-- your steps here -->
-                    <div class="step" data-target="#start-part">
-                        <button type="button" class="step-trigger" role="tab" aria-controls="start-part"
-                            id="start-part-trigger">
-                            <span class="bs-stepper-circle">1</span>
-                            <span class="bs-stepper-label">Elegir punto de inicio</span>
-                        </button>
+            <div id="floating-panel">
+                <button id="limpiar" type="button" class="btn btn-danger">Limpiar</button>
+
+                <button id="importar" class="btn btn-secondary">Importar</button>
+                <label for="file-select">
+                    <input id="file-select" type="file" accept=".json" style="display:none">
+                </label>
+
+
+                <button id="exportar" type="button" class="btn btn-secondary">Exportar</button>
+            </div>
+            <br>
+
+            <div id="map"></div>
+        </div>
+
+        <hr>
+        <div class="bs-stepper" id="stepper">
+            <div class="bs-stepper-header" role="tablist">
+                <!-- your steps here -->
+                <div class="step" data-target="#start-part">
+                    <button type="button" class="step-trigger" role="tab" aria-controls="start-part"
+                        id="start-part-trigger">
+                        <span class="bs-stepper-circle">1</span>
+                        <span class="bs-stepper-label">Elegir punto de inicio</span>
+                    </button>
+                </div>
+                <div class="line"></div>
+                <div class="step" data-target="#delivery-part">
+                    <button type="button" class="step-trigger" role="tab" aria-controls="delivery-part"
+                        id="delivery-part-trigger">
+                        <span class="bs-stepper-circle">2</span>
+                        <span class="bs-stepper-label">Agregar puntos de entrega</span>
+                    </button>
+                </div>
+                <div class="line"></div>
+                <div class="step" data-target="#last-part">
+                    <button type="button" class="step-trigger" role="tab" aria-controls="last-part"
+                        id="last-part-trigger">
+                        <span class="bs-stepper-circle">3</span>
+                        <span class="bs-stepper-label">Obtener ruta</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="bs-stepper-content">
+                <!-- your steps content here -->
+                <div id="start-part" class="content" role="tabpanel" aria-labelledby="start-part-trigger">
+
+                    <div class="alert alert-light" role="alert">
+                        Agrega el punto de inicio seleccionando su ubicación en el mapa.
                     </div>
-                    <div class="line"></div>
-                    <div class="step" data-target="#delivery-part">
-                        <button type="button" class="step-trigger" role="tab" aria-controls="delivery-part"
-                            id="delivery-part-trigger">
-                            <span class="bs-stepper-circle">2</span>
-                            <span class="bs-stepper-label">Agregar puntos de entrega</span>
-                        </button>
-                    </div>
-                    <div class="line"></div>
-                    <div class="step" data-target="#last-part">
-                        <button type="button" class="step-trigger" role="tab" aria-controls="last-part"
-                            id="last-part-trigger">
-                            <span class="bs-stepper-circle">3</span>
-                            <span class="bs-stepper-label">Finalizar</span>
-                        </button>
-                    </div>
+
                 </div>
 
-                <div class="bs-stepper-content">
-                    <!-- your steps content here -->
-                    <div id="start-part" class="content" role="tabpanel" aria-labelledby="start-part-trigger">
 
-                        <div class="alert alert-light" role="alert">
-                            Agrega el punto de inicio seleccionando su ubicación en el mapa.
+                <div id="delivery-part" class="content" role="tabpanel" aria-labelledby="delivery-part-trigger">
+                    <div class="alert alert-light" role="alert">
+                        <span>Añade por lo menos un punto de entrega en el mapa</span>
+                        <ul>
+                            <li>
+                                <strong>Agrega puntos</strong>
+                                <span>Selecciona su ubicación en el mapa y se generará un marcador. Puedes agregar
+                                    multiples
+                                    puntos.</span>
+
+                            </li>
+                            <li>
+                                <strong>Mover puntos</strong>
+                                <span>Arrastra un marcador en el mapa a la posición deseada</span>
+
+                            </li>
+                            <li>
+                                <strong>Eliminar punto</strong>
+                                <span>Presiona dos veces el botón izquierdo del ratón sobre un marcador</span>
+
+                            </li>
+                        </ul>
+
+                        Selecciona la opción <strong>Obtener ruta</strong> cuando hayas finalizado.<br>
+<!--
+                        <div>
+                            <button class="btn btn-primary float-right">Siguiente</button>
                         </div>
+                    -->
+                        <br>
+                        <br>
+
 
                     </div>
 
+                </div>
+                <div id="last-part" class="content" role="tabpanel" aria-labelledby="last-part-trigger">
 
-                    <div id="delivery-part" class="content" role="tabpanel" aria-labelledby="delivery-part-trigger">
-                        <div class="alert alert-light" role="alert">
-                            Agrega puntos de entrega seleccionando su ubicación en el mapa. Puedes agregar multiples
-                            puntos. <br>
-                            Puedes mover la ubicación de un punto arrastrándolo con el ratón y puedes eliminarlos
-                            haciend doble click sobre estos. <br><br>
+                    <div class="alert alert-light" role="alert">
+                        Elige la forma de calcular la distancia entre punto de incio y entrega
+                        <ul>
+                            <li>
+                                <strong>Heurístico:</strong>
+                                <span> distancia en liena recta entre ambos puntos</span>
+                            </li>
+                            <li>
+                                <strong>No heurístico:</strong>
+                                <span>desplazamiento entre ambos puntos siguiendo la autopista</span>
+                            </li>
+                        </ul>
 
-                            Presiona <strong>Siguiente</strong> cuando hayas finalizado.<br>
-
-                            <div>
-                                <button class="btn btn-primary float-right">Siguiente</button>
+                        <div class="row">
+                            <div class="col-md-12 text-center">
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                    <label class="btn btn-secondary active">
+                                        <input type="radio" name="heuristic" value="1" autocomplete="off" checked>
+                                        Heurístico
+                                    </label>
+                                    <label class="btn btn-secondary">
+                                        <input type="radio" name="heuristic" value="0" autocomplete="off"> No
+                                        Heurístico
+                                    </label>
+                                </div>
                             </div>
-
-                            <br>
-                            <br>
-
-
                         </div>
 
-                    </div>
-                    <div id="last-part" class="content" role="tabpanel" aria-labelledby="last-part-trigger">
 
                         <div style="text-align: center; margin-top: 10px;">
                             <button class="button" id="enviar">Generar Ruta con el Algoritmo S.A</button>
                         </div>
                     </div>
+
+
+
                 </div>
             </div>
-
         </div>
+
 
 
     </div>

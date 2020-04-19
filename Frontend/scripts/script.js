@@ -39,7 +39,7 @@ function iniciarMap() {
   //Icono de la Caja
   let iconBox = {
     url: "images/caja.png",
-    scaledSize: new google.maps.Size(50, 50), // scaled size
+    scaledSize: new google.maps.Size(35, 35), // scaled size
     origin: new google.maps.Point(0, 0), // origin
     anchor: new google.maps.Point(10, 10) // anchor
   };
@@ -47,7 +47,7 @@ function iniciarMap() {
   //Icono del camion  
   let iconTruck = {
     url: "images/camion.png",
-    scaledSize: new google.maps.Size(70, 50), // scaled size
+    scaledSize: new google.maps.Size(49, 35), // scaled size
     origin: new google.maps.Point(0, 0), // origin
     anchor: new google.maps.Point(10, 10)
   }
@@ -175,6 +175,11 @@ function iniciarMap() {
   btnEnviar.onclick = function () {
     let url = 'http://localhost:5000/';
 
+    
+    let val = document.querySelector('input[name="heuristic"]:checked').value == 1? true : false;
+    let args = `?use_heuristic=${val}`;
+
+
     //check that data is ready
     let data = null;
     try {
@@ -185,7 +190,7 @@ function iniciarMap() {
     }
 
     console.log(JSON.stringify(data))
-    fetch(url, {
+    fetch(`${url+args}`, {
       method: 'POST', // or 'PUT'
       body: JSON.stringify(data), // data can be `string` or {object}!
       headers: {
